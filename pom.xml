@@ -20,6 +20,12 @@
     <version>5.4.0</version>
     <scope>test</scope>
   </dependency>
+  
+  <dependency>
+    <groupId>pl.pragmatists</groupId>
+    <artifactId>JUnitParams</artifactId>
+    <version>5.4.0</version>
+  </dependency>
 
  </dependencies> 
 
