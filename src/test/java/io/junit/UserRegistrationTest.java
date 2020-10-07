@@ -1,34 +1,49 @@
 package io.junit;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-
-class UserRegistrationTest {
-
-	private static UserRegistration userRegistration;
-	
-	@BeforeEach
-	void initiate() {
-		userRegistration = new UserRegistration();
+public class UserRegistrationTest{
+	UserRegistration user = new UserRegistration();
+	@Test
+	public void givenFirstName_Valid_shouldReturnValid() {
+		assertEquals("valid", user.validateFirstName("Abc"));
 	}
-	
-	@ParameterizedTest
-	@ValueSource(strings = {"abc@yahoo.com", "abc-100@yahoo.com", "abc.100@yahoo.com", "abc111@abc.com", "abc-100@abc.net", "abc.100@abc.com.au",
-			"abc@1.com", "abc@gmail.com.com", "abc+100@gmail.com"})
-	public void email_ifValid_shouldReturnValid(String validEmails) {
-		assertEquals("valid", userRegistration.validateEmail(validEmails));
-		
+	@Test
+	public void givenLastName_Valid_shouldReturnValid() {
+		assertEquals("valid", user.validateLastName("Abc"));
 	}
-	
-	@ParameterizedTest
-	@ValueSource(strings = {"abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc123@.com.com", ".abc@abc.com", "abc()*.com", "abc@%*.com", 
-			"abc..2002@gmail.com", "abc.@gmail.com", "abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au"})
-	public void email_ifInvalid_shouldReturnInvalid(String invalidEmails) {
-		assertEquals("invalid", userRegistration.validateEmail(invalidEmails));
-		
+	@Test
+	public void givenEmail_Valid_shouldReturnValid() {
+		assertEquals("valid", user.validateEmail("abc@gmail.com"));
 	}
-}	
+	@Test
+	public void givenMobileNumber_Valid_shouldReturnValid() {
+		assertEquals("valid", user.validateMobileNumber("91 7738454018"));
+	}
+	@Test
+	public void givenPassword_Valid_shouldReturnValid() {
+		assertEquals("valid", user.validatePassword("Shivam9@p"));
+	}
+	@Test
+	public void givenFirstName_Invalid_shouldReturnInvalid() {
+		assertEquals("invalidFirstName", user.validateFirstName("S"));
+	}
+	@Test
+	public void givenLastName_Invalid_shouldReturnInvalid() {
+		assertEquals("invalidLastName", user.validateLastName("Sh"));
+	}
+	@Test
+	public void givenEmail_Invalid_shouldReturnInvalid() {
+		assertEquals("invalidEmail", user.validateEmail("Shivam"));
+	}
+	@Test
+	public void givenMobileNumber_Invalid_shouldReturnInvalid() {
+		assertEquals("invalidMobileNumber", user.validateMobileNumber("Shivam"));
+	}
+	@Test
+	public void givenPassword_Invalid_shouldReturnInvalid() {
+		assertEquals("invalidPassword", user.validatePassword("Shivam"));
+	}
+
+}

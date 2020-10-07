@@ -22,10 +22,12 @@
   </dependency>
   
   <dependency>
-    <groupId>pl.pragmatists</groupId>
-    <artifactId>JUnitParams</artifactId>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-params</artifactId>
     <version>5.4.0</version>
+    <scope>test</scope>
   </dependency>
+  
 
  </dependencies> 
 

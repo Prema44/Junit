@@ -1,47 +1,122 @@
 package io.junit;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-	public class UserRegistration {
-		public String validateInput(String name) {
-			String expression = "(^[A-Z]{1})[a-z]{2,}$"; // Pattern for Names
-			Pattern pattern = Pattern.compile(expression);
-			Matcher match = pattern.matcher(name);
-			if(match.find()) {
-				return "valid";
-			}
-			return "invalid";
+
+public class UserRegistration {
+	static final String regexForName = "^[A-Z]{1}[a-zA-z]{2,}";
+	static final String regexForEmail = "^[A-Z]{1}[a-zA-z]{2,}";
+	static final String regexForMobileNumber = "^[A-Z]{1}[a-zA-z]{2,}";
+	static final String regexForPassword = "^[A-Z]{1}[a-zA-z]{2,}";
+	public static boolean validateInput(String input, String regex) {
+		boolean result;
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input);
+		if(matcher.find()) {
+			result = true;
 		}
-		public String validateEmail(String Email) {
-			String expression = "(abc?[.][A-Za-z]*@bl[.]co[.][A-Za-z]{2,})$"; // Pattern for Email
-			Pattern pattern = Pattern.compile(expression);
-			Matcher match = pattern.matcher(Email);
-			if(match.find()) {
-				return "valid";
+		else {
+			result = false;
+		}	
+		return result;
+	}
+	public String validateFirstName(String firstName) {
+		String result = "";
+		try {
+			if(validateInput(firstName, regexForName)) {
+				result = "valid";
 			}
-			return "invalid";
-		}
-		public String validateNumber(String number) {
-			String expression = "^[0-9]{2}?[ ][0-9]{4,13}";	// Pattern for Number
-			Pattern pattern = Pattern.compile(expression);
-			Matcher match = pattern.matcher(number);
-			if(match.find()) {
-				return "valid";
+			else {
+				throw new InvalidUserDetailsException(InvalidUserDetailsException.invalidCredentials.invalidFirstName, "Invalid User Details");
 			}
-			return "invalid";
-			
 		}
-		public String validatePassword(String pass) {
-			String expression = "(?=.*[A-Z])(?=.*\\d)((?=.*[@$!%*?&]){1})[A-Za-z0-9]{8,}";	//Pattern for Password
-			Pattern pattern = Pattern.compile(expression);
-			Matcher match = pattern.matcher(pass);
-			if(match.find()) {
-				return "valid";
+		catch(InvalidUserDetailsException exception) {
+			result = exception.type.toString();
+		}
+		return result;
+	}
+	public String validateLastName(String lastName) {
+		String result = "";
+		try {
+			if(validateInput(lastName, regexForName)) {
+				result = "valid";
 			}
-			return "invalid";
-			
+			else {
+				throw new InvalidUserDetailsException(InvalidUserDetailsException.invalidCredentials.invalidLastName, "Invalid User Details");
+			}
 		}
-		
+		catch(InvalidUserDetailsException exception) {
+			result = exception.type.toString();
+		}
+		return result;
+	}
+	public String validateEmail(String email) {
+		String result = "";
+		try {
+			if(validateInput(email, regexForEmail)) {
+				result = "valid";
+			}
+			else {
+				throw new InvalidUserDetailsException(InvalidUserDetailsException.invalidCredentials.invalidEmail, "Invalid User Details");
+			}
+		}
+		catch(InvalidUserDetailsException exception) {
+			result = exception.type.toString();
+		}
+		return result;
+	}
+	public String validateMobileNumber(String number) {
+		String result = "";
+		try {
+			if(validateInput(number, regexForMobileNumber)) {
+				result = "valid";
+			}
+			else
+			{
+				throw new InvalidUserDetailsException(InvalidUserDetailsException.invalidCredentials.invalidMobileNumber, "Invalid User Details");
+			}
+		}
+		catch(InvalidUserDetailsException exception) {
+			result = exception.type.toString();
+		}
+		return result;
+	}
+	public String validatePassword(String password) {
+		String result = "";
+		try {
+			if(validateInput(password,regexForPassword)) {
+				result = "valid";
+			}
+			else {
+				throw new InvalidUserDetailsException(InvalidUserDetailsException.invalidCredentials.invalidPassword, "Invalid User Details");
+			}
+		}
+		catch(InvalidUserDetailsException exception) {
+			result = exception.type.toString();
+		}
+		return result;
+	}
+	public static void main(String[] args) {
+		UserRegistration user = new UserRegistration();
+		String test = "";
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the first name");
+		test = input.nextLine();
+		System.out.println(user.validateFirstName(test));//validation of first name	
+		System.out.println("Enter the last name");
+		test = input.nextLine();
+		System.out.println(user.validateLastName(test));//validation of last name
+		System.out.println("Enter the Email");
+		test=input.nextLine();
+		System.out.println(user.validateEmail(test));//validation of email
+		System.out.println("Enter the Mobile Number");
+		test = input.nextLine();
+		System.out.println(user.validateMobileNumber(test));//validation of MobileNumber
+		System.out.println("Enter the Password");
+		test = input.nextLine();
+		System.out.println(user.validatePassword(test));//validation of Password
+		input.close();
 	}
 
-
+}
