@@ -23,7 +23,7 @@ public class UserRegistrationTest{
 	}
 	@Test
 	public void givenPassword_Valid_shouldReturnValid() {
-		assertEquals("valid", user.validatePassword("Shivam9@p"));
+		assertEquals("valid", user.validatePassword("Sakshat9@p"));
 	}
 	@Test
 	public void givenFirstName_Invalid_shouldReturnInvalid() {
@@ -35,15 +35,15 @@ public class UserRegistrationTest{
 	}
 	@Test
 	public void givenEmail_Invalid_shouldReturnInvalid() {
-		assertEquals("invalidEmail", user.validateEmail("Shivam"));
+		assertEquals("invalidEmail", user.validateEmail("Sakshat"));
 	}
 	@Test
 	public void givenMobileNumber_Invalid_shouldReturnInvalid() {
-		assertEquals("invalidMobileNumber", user.validateMobileNumber("Shivam"));
+		assertEquals("invalidMobileNumber", user.validateMobileNumber("Sakshat"));
 	}
 	@Test
 	public void givenPassword_Invalid_shouldReturnInvalid() {
-		assertEquals("invalidPassword", user.validatePassword("Shivam"));
+		assertEquals("invalidPassword", user.validatePassword("Sakshat"));
 	}
 
 }

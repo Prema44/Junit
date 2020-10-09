@@ -6,25 +6,14 @@ import java.util.regex.Pattern;
 
 public class UserRegistration {
 	static final String regexForName = "^[A-Z]{1}[a-zA-z]{2,}";
-	static final String regexForEmail = "^[A-Z]{1}[a-zA-z]{2,}";
-	static final String regexForMobileNumber = "^[A-Z]{1}[a-zA-z]{2,}";
-	static final String regexForPassword = "^[A-Z]{1}[a-zA-z]{2,}";
-	public static boolean validateInput(String input, String regex) {
-		boolean result;
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(input);
-		if(matcher.find()) {
-			result = true;
-		}
-		else {
-			result = false;
-		}	
-		return result;
-	}
+	static final String regexForEmail = "^[a-zA-Z0-9_]+[-+.]?[A-Za-z0-9_]+@[A-Za-z0-9]+[.][a-z]{2,}[.]?([a-z]{2,})?$";
+	static final String regexForMobileNumber = "^([0-9]{1,4}[ ][0-9]{10})$";
+	static final String regexForPassword = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@!%_&])[A-Za-z0-9$#@!%_&]{8,}$";
+	
 	public String validateFirstName(String firstName) {
 		String result = "";
 		try {
-			if(validateInput(firstName, regexForName)) {
+			if(validate.validateInput(firstName, regexForName)) {
 				result = "valid";
 			}
 			else {
@@ -39,7 +28,7 @@ public class UserRegistration {
 	public String validateLastName(String lastName) {
 		String result = "";
 		try {
-			if(validateInput(lastName, regexForName)) {
+			if(validate.validateInput(lastName, regexForName)) {
 				result = "valid";
 			}
 			else {
@@ -54,7 +43,7 @@ public class UserRegistration {
 	public String validateEmail(String email) {
 		String result = "";
 		try {
-			if(validateInput(email, regexForEmail)) {
+			if(validate.validateInput(email, regexForEmail)) {
 				result = "valid";
 			}
 			else {
@@ -69,7 +58,7 @@ public class UserRegistration {
 	public String validateMobileNumber(String number) {
 		String result = "";
 		try {
-			if(validateInput(number, regexForMobileNumber)) {
+			if(validate.validateInput(number, regexForMobileNumber)) {
 				result = "valid";
 			}
 			else
@@ -85,7 +74,7 @@ public class UserRegistration {
 	public String validatePassword(String password) {
 		String result = "";
 		try {
-			if(validateInput(password,regexForPassword)) {
+			if(validate.validateInput(password,regexForPassword)) {
 				result = "valid";
 			}
 			else {
@@ -97,6 +86,18 @@ public class UserRegistration {
 		}
 		return result;
 	}
+	    ValidateInput validate = (String input, String regex) -> {
+		boolean result;
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input);
+		if(matcher.find()) {
+			result = true;
+		}
+		else {
+			result = false;
+		}	
+		return result;
+	};
 	public static void main(String[] args) {
 		UserRegistration user = new UserRegistration();
 		String test = "";
@@ -116,7 +117,6 @@ public class UserRegistration {
 		System.out.println("Enter the Password");
 		test = input.nextLine();
 		System.out.println(user.validatePassword(test));//validation of Password
-		input.close();
 	}
 
 }
